@@ -1,0 +1,32 @@
+table Opponent
+	lineageTag: 92747e96-85db-5b99-a84c-2d8b1888b1b7
+
+	column opponent_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 324124d9-83f8-5f12-acc0-c71a4cc6b4a4
+		summarizeBy: none
+		sourceColumn: opponent_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Opponent
+		dataType: string
+		lineageTag: 6a10643d-8310-55cd-a984-2e6cfa71e9d8
+		summarizeBy: none
+		sourceColumn: opponent
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Opponent = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "dim_opponent"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

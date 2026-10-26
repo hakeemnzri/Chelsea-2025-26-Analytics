@@ -1,0 +1,318 @@
+table 'Player Stats'
+	lineageTag: 115b1ae4-abb7-58d8-a435-97af1be5c9ef
+
+	measure 'Players Used' = DISTINCTCOUNT ( 'Player Stats'[player_key] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: d41bd9f8-cc8f-59b5-8f0e-9be3ae8a50a2
+
+	measure Appearances = SUM ( 'Player Stats'[pm_appearances] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: 7d20f462-3c4b-526f-be28-37624f4be459
+
+	measure Starts = SUM ( 'Player Stats'[pm_starts] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: 4899c0d6-4c80-5ffe-b260-b2022090e12d
+
+	measure 'Sub Appearances' = SUM ( 'Player Stats'[pm_sub_appearances] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: e3631bee-9a88-5cc1-a8b3-1ec9745e95ff
+
+	measure Minutes = SUM ( 'Player Stats'[pm_minutes] )
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 6d5ba1e9-9e78-52a1-8f27-4d5acbe768ca
+
+	measure Goals = SUM ( 'Player Stats'[pm_goals] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: dd35fe53-0c40-5ec4-a00a-de5268468bbe
+
+	measure Assists = SUM ( 'Player Stats'[pm_assists] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: a571fb32-382f-5296-bed3-5502b701e7e0
+
+	measure 'Goal Contributions' = [Goals] + [Assists]
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: 894743f9-5753-5639-800a-201f901dc247
+
+	measure 'Player xG' = SUM ( 'Player Stats'[pm_xg] )
+		formatString: 0.00
+		displayFolder: Volume
+		lineageTag: f9bbf21d-f6d5-53b3-ad3d-4b3c7e2e006b
+
+	measure 'Player xA' = SUM ( 'Player Stats'[pm_xa] )
+		formatString: 0.00
+		displayFolder: Volume
+		lineageTag: 6d066b2a-024b-5418-9de5-52d7f6e9af18
+
+	measure Shots = SUM ( 'Player Stats'[pm_shots] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: 33ff3c76-9261-574e-9162-1a029c3e9a0a
+
+	measure 'Key Passes' = SUM ( 'Player Stats'[pm_key_passes] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: edf9e579-b7cc-501f-b28d-5d0c4ade6a8a
+
+	measure 'Yellow Cards' = SUM ( 'Player Stats'[pm_yellow_cards] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: 40ff1732-f3bd-502e-8977-b4974a226fc8
+
+	measure 'Red Cards' = SUM ( 'Player Stats'[pm_red_cards] )
+		formatString: 0
+		displayFolder: Volume
+		lineageTag: 9ce200b0-cf9c-546a-9434-e2df4467bed0
+
+	measure 'Goals per 90' = DIVIDE ( [Goals] * 90, [Minutes] )
+		formatString: 0.00
+		displayFolder: Rates
+		lineageTag: 31fbe291-e0d8-59c6-b5c4-53a6c574ecfc
+
+	measure 'G+A per 90' = DIVIDE ( [Goal Contributions] * 90, [Minutes] )
+		formatString: 0.00
+		displayFolder: Rates
+		lineageTag: c7c4ffe8-9d70-5818-841e-4fa2518353c5
+
+	measure 'xG per 90' = DIVIDE ( [Player xG] * 90, [Minutes] )
+		formatString: 0.00
+		displayFolder: Rates
+		lineageTag: 92de6439-b873-5877-90cd-fd571a11cc50
+
+	measure 'Shot Conversion %' = DIVIDE ( [Goals], [Shots] )
+		formatString: 0.0%
+		displayFolder: Rates
+		lineageTag: d4c88544-ad9d-5830-a864-d69fa56842f0
+
+	measure 'Goals vs xG' = [Goals] - [Player xG]
+		formatString: +0.00;-0.00;0.00
+		displayFolder: Rates
+		lineageTag: ab874253-c435-5f9b-9cd6-799cdeef944e
+
+	measure 'Goals (chart)' = IF ( [Goals] > 0, [Goals] )
+		formatString: 0
+		isHidden
+		displayFolder: Chart Helpers
+		lineageTag: 2ad9cc8e-5996-52b1-bae8-593c5caf8148
+
+	measure 'Assists (chart)' = IF ( [Assists] > 0, [Assists] )
+		formatString: 0
+		isHidden
+		displayFolder: Chart Helpers
+		lineageTag: b7d2d5b3-b9b6-58a4-956a-c850049b6f22
+
+	column player_match_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3cdcd51-a158-5b30-9825-ed6c79b0a86d
+		summarizeBy: none
+		sourceColumn: player_match_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column match_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fe359295-2f29-5b5e-ab23-e6457306d15d
+		summarizeBy: none
+		sourceColumn: match_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column player_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3e3b275-ecc5-5bee-bc24-663265acaaeb
+		summarizeBy: none
+		sourceColumn: player_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 025176fb-facc-5f9c-a67a-4696eeeadd53
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column competition_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5be1e0cf-b757-594c-9dc8-57ca67a4d237
+		summarizeBy: none
+		sourceColumn: competition_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column opponent_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2788cac6-928a-5099-843c-a739836d3cf2
+		summarizeBy: none
+		sourceColumn: opponent_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column venue
+		dataType: string
+		isHidden
+		lineageTag: 40028f49-676e-523c-89ee-10e18d5a7e3f
+		summarizeBy: none
+		sourceColumn: venue
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_minutes
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 720d4680-ca7b-50bc-9232-d472bb7bf543
+		summarizeBy: sum
+		sourceColumn: minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_appearances
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4c547ccd-ed7f-5a19-82be-2d26d06b69e9
+		summarizeBy: sum
+		sourceColumn: appearances
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_starts
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a7363da1-4431-520b-be7a-7090b3ad38de
+		summarizeBy: sum
+		sourceColumn: starts
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_sub_appearances
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 90bb3f78-fa2e-5f6c-8331-268ce2ac433a
+		summarizeBy: sum
+		sourceColumn: sub_appearances
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_goals
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fafc900e-55d6-51f4-b0b8-a1c7367c308f
+		summarizeBy: sum
+		sourceColumn: goals
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_assists
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a5afda2b-cac4-5315-b4ee-5bb3add54644
+		summarizeBy: sum
+		sourceColumn: assists
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_xg
+		dataType: double
+		isHidden
+		lineageTag: 165cd4e8-3936-52d1-a8de-6b2b23f818fb
+		summarizeBy: sum
+		sourceColumn: xg
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_xa
+		dataType: double
+		isHidden
+		lineageTag: 7c23f18a-a1c7-564d-90e5-19ca6386d219
+		summarizeBy: sum
+		sourceColumn: xa
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_shots
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4ffa32fa-7ad7-5a14-8de7-9ec26db31328
+		summarizeBy: sum
+		sourceColumn: shots
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_key_passes
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 01138884-cc5f-59c8-8ffc-e97a82b46d3a
+		summarizeBy: sum
+		sourceColumn: key_passes
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_yellow_cards
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 026f8788-6614-5e7d-8632-2f5dcc9e3b24
+		summarizeBy: sum
+		sourceColumn: yellow_cards
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_red_cards
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 322be96d-33ba-5012-b07b-4dea323d1eb2
+		summarizeBy: sum
+		sourceColumn: red_cards
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm_own_goals
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 59082166-efce-55cf-8840-d9f70ab221d8
+		summarizeBy: sum
+		sourceColumn: own_goals
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Player Stats' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "fact_player_match"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

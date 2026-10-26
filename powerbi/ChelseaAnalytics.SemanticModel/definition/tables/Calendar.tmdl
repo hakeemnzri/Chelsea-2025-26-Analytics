@@ -1,0 +1,130 @@
+table Calendar
+	lineageTag: 1a8472e0-c172-56f7-ba3b-8ea6c832bd9f
+	dataCategory: Time
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aae98f0c-1084-54c9-b98e-85adbb4a9aa0
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: dd mmm yyyy
+		lineageTag: ee539a71-5737-5d9f-b871-e6d37bbb7599
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 36312efe-8bca-5577-b90f-3777726e32ce
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 56cc9654-f100-5700-b0cd-862777de814e
+		summarizeBy: none
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: c589e207-a46f-59b3-a7a1-c18b4c99870f
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: 'Season Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 29f62bf9-09c1-594a-88b4-f8c6fe7fb0a8
+		summarizeBy: none
+		sourceColumn: month_short
+		sortByColumn: 'Season Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: 8bb76d58-1364-5f98-8d41-dc3f4d21eb94
+		summarizeBy: none
+		sourceColumn: month_year
+		sortByColumn: 'Month Year Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: df4cd2c8-d6b6-5206-b0bd-692e053ca0a0
+		summarizeBy: none
+		sourceColumn: month_year_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Season Month Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 97a8fbce-b75a-5b73-93a3-0eab9867d5a4
+		summarizeBy: none
+		sourceColumn: season_month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Name'
+		dataType: string
+		lineageTag: f1cedfe7-996d-58e2-b0d8-d7429b0f62c2
+		summarizeBy: none
+		sourceColumn: day_name
+		sortByColumn: 'Day of Week'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4e51c6fe-77be-5d55-90f3-96ceb43df227
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Weekend'
+		dataType: boolean
+		lineageTag: 2f19f2c8-b5f7-5b97-b8c3-04315a035f6c
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "dim_date"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

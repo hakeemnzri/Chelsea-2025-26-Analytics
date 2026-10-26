@@ -1,0 +1,321 @@
+table Matches
+	lineageTag: 7a842386-c7d4-5635-8f0e-9dcccbb2d61d
+
+	measure 'Matches Played' = COUNTROWS ( Matches )
+		formatString: 0
+		displayFolder: Results
+		lineageTag: 2730cc7c-51e6-560b-b768-95a5c2b2cf8c
+
+	measure Wins = IF ( NOT ISEMPTY ( Matches ), COUNTROWS ( FILTER ( Matches, Matches[Result] = "W" ) ) + 0 )
+		formatString: 0
+		displayFolder: Results
+		lineageTag: a5f828cd-8390-51a1-bd58-d6a2e28590df
+
+	measure Draws = IF ( NOT ISEMPTY ( Matches ), COUNTROWS ( FILTER ( Matches, Matches[Result] = "D" ) ) + 0 )
+		formatString: 0
+		displayFolder: Results
+		lineageTag: a1c4bd29-4dea-53ea-9c78-edd89b21c010
+
+	measure Losses = IF ( NOT ISEMPTY ( Matches ), COUNTROWS ( FILTER ( Matches, Matches[Result] = "L" ) ) + 0 )
+		formatString: 0
+		displayFolder: Results
+		lineageTag: 6ca1d6c3-39c3-552c-a3ed-de58e59bb9cb
+
+	measure Record =
+			IF (
+			    NOT ISEMPTY ( Matches ),
+			    [Wins] & "-" & [Draws] & "-" & [Losses]
+			)
+		displayFolder: Results
+		lineageTag: b2643d2b-f9f0-5456-b8bf-c28cf8d1bc72
+
+	measure Points = SUM ( Matches[m_points] )
+		formatString: 0
+		displayFolder: Results
+		lineageTag: 5e54a446-a424-5fff-914a-3018b9ba3cfc
+
+	measure 'Points per Game' = DIVIDE ( [Points], [Matches Played] )
+		formatString: 0.00
+		displayFolder: Results
+		lineageTag: 356fbcee-acfc-5f58-9961-2b678acafc54
+
+	measure 'Win %' = DIVIDE ( [Wins], [Matches Played] )
+		formatString: 0.0%
+		displayFolder: Results
+		lineageTag: d5fd7eca-9465-51bb-8850-48cc13fa48a9
+
+	measure 'Form (Last 5)' =
+			VAR LastFive = TOPN ( 5, Matches, Matches[Match Date], DESC )
+			RETURN
+			    CONCATENATEX ( LastFive, Matches[Result], " ", Matches[Match Date], ASC )
+		displayFolder: Results
+		lineageTag: 38a93b65-b446-5318-b1d8-8ebdc60e8688
+
+	measure 'Cumulative Points' =
+			VAR CurrentDate = MAX ( Matches[Match Date] )
+			RETURN
+			    CALCULATE (
+			        [Points],
+			        FILTER ( ALLSELECTED ( Matches[Match Date] ), Matches[Match Date] <= CurrentDate )
+			    )
+		formatString: 0
+		displayFolder: Results
+		lineageTag: a56754eb-8eec-5c28-bfdf-268339c92ee4
+
+	measure 'Goals For' = SUM ( Matches[m_goals_for] )
+		formatString: 0
+		displayFolder: Goals
+		lineageTag: 9cc77e7b-985e-5b44-9030-bda9983acaa4
+
+	measure 'Goals Against' = SUM ( Matches[m_goals_against] )
+		formatString: 0
+		displayFolder: Goals
+		lineageTag: 34909654-5b61-5200-83b3-f8da7cc75354
+
+	measure 'Goal Difference' = [Goals For] - [Goals Against]
+		formatString: +0;-0;0
+		displayFolder: Goals
+		lineageTag: 05c0608a-843f-5fb9-a5a8-6f2ab04a5960
+
+	measure 'Goals For per Game' = DIVIDE ( [Goals For], [Matches Played] )
+		formatString: 0.00
+		displayFolder: Goals
+		lineageTag: 4108f067-d167-5ea2-b8cb-d28c9ce8de60
+
+	measure 'Goals Against per Game' = DIVIDE ( [Goals Against], [Matches Played] )
+		formatString: 0.00
+		displayFolder: Goals
+		lineageTag: 9c58d86d-0464-587b-8c83-8a0c4a1870df
+
+	measure 'Clean Sheets' = IF ( NOT ISEMPTY ( Matches ), COUNTROWS ( FILTER ( Matches, Matches[m_goals_against] = 0 ) ) + 0 )
+		formatString: 0
+		displayFolder: Goals
+		lineageTag: 7df795b4-cc8f-5bb3-91f0-3abb4a181f7f
+
+	measure 'xG For' = SUM ( Matches[m_xg_for] )
+		formatString: 0.00
+		displayFolder: Expected Goals
+		lineageTag: a2370e42-c426-5da7-b10a-6b8e8c3975f5
+
+	measure 'xG Against' = SUM ( Matches[m_xg_against] )
+		formatString: 0.00
+		displayFolder: Expected Goals
+		lineageTag: e23fffd0-26d2-55b1-9aaa-11134de66901
+
+	measure 'xG Difference' = IF ( NOT ISBLANK ( [xG For] ), [xG For] - [xG Against] )
+		formatString: +0.00;-0.00;0.00
+		displayFolder: Expected Goals
+		lineageTag: 67ef8a8a-ca74-564d-a761-cbae42f4fac9
+
+	measure 'Goals For vs xG' =
+			-- Compares only matches that have xG, so cup goals don't inflate the gap
+			VAR GoalsInXgMatches =
+			    CALCULATE ( [Goals For], KEEPFILTERS ( NOT ISBLANK ( Matches[m_xg_for] ) ) )
+			RETURN
+			    IF ( NOT ISBLANK ( [xG For] ), GoalsInXgMatches - [xG For] )
+		formatString: +0.00;-0.00;0.00
+		displayFolder: Expected Goals
+		lineageTag: 49b95cb4-b63c-5018-81cb-d755571ce5ef
+
+	measure 'Avg Possession %' = DIVIDE ( AVERAGE ( Matches[m_possession_pct] ), 100 )
+		formatString: 0.0%
+		displayFolder: Match Info
+		lineageTag: fd31d173-718c-5938-a000-626a3e3e29ae
+
+	measure 'Avg Attendance' = AVERAGE ( Matches[m_attendance] )
+		formatString: #,0
+		displayFolder: Match Info
+		lineageTag: 64d86533-6b20-5d90-a4f9-d2e9396bf669
+
+	column match_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 467af76f-6c5d-5860-a4d4-16823728f8d5
+		summarizeBy: none
+		sourceColumn: match_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18c09dcb-0bb8-5333-9700-836fba505f7e
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column competition_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 52a4d900-86b2-5f95-9cdd-de63903a45c4
+		summarizeBy: none
+		sourceColumn: competition_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column opponent_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c7d8b06c-704d-50af-b31a-de468d5a8301
+		summarizeBy: none
+		sourceColumn: opponent_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column venue
+		dataType: string
+		isHidden
+		lineageTag: 84680f37-7da0-53b0-8500-98c82d95bd96
+		summarizeBy: none
+		sourceColumn: venue
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Match Date'
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: b2e4502b-6752-5ee4-a742-6a47b77de95e
+		summarizeBy: none
+		sourceColumn: match_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Match
+		dataType: string
+		lineageTag: ba103a01-16e3-5529-9697-fed43f5cd539
+		summarizeBy: none
+		sourceColumn: match_label
+		sortByColumn: 'Match Date'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Score
+		dataType: string
+		lineageTag: 181b85c5-ecaa-5af8-ace7-656ffea7fc1e
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Result
+		dataType: string
+		lineageTag: eced30df-9a06-5343-999b-b56f9dce0113
+		summarizeBy: none
+		sourceColumn: result
+		sortByColumn: 'Result Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Result Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69a7e297-c794-5738-86f6-ee46bb078884
+		summarizeBy: none
+		sourceColumn: result_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Referee
+		dataType: string
+		lineageTag: e06e5fa1-08db-5cc9-af92-176002d2b4eb
+		summarizeBy: none
+		sourceColumn: referee
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_points
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bb976d19-c1d7-55c8-9a51-7d16c7a09b9c
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_goals_for
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 612fbdc7-e64a-51e8-abff-6b6b17b16f4b
+		summarizeBy: sum
+		sourceColumn: goals_for
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_goals_against
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 47ce90b7-1a32-5210-98b7-1f6c2710d29f
+		summarizeBy: sum
+		sourceColumn: goals_against
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_goal_difference
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 28f202f4-e7af-5458-8fac-bd5449f5518d
+		summarizeBy: sum
+		sourceColumn: goal_difference
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_xg_for
+		dataType: double
+		isHidden
+		lineageTag: 7bc188b4-6124-562a-8e77-a1e7b9e5ec58
+		summarizeBy: sum
+		sourceColumn: xg_for
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_xg_against
+		dataType: double
+		isHidden
+		lineageTag: 63e9deb5-efaf-53e2-a543-b580749da2d9
+		summarizeBy: sum
+		sourceColumn: xg_against
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_possession_pct
+		dataType: double
+		isHidden
+		lineageTag: de3ed207-b097-5af4-affe-128141606525
+		summarizeBy: sum
+		sourceColumn: possession_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_attendance
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f6ffab9e-6a0f-5718-80e6-e8696e42a34e
+		summarizeBy: sum
+		sourceColumn: attendance
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Matches = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "fact_match"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

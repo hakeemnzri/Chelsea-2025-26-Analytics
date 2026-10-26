@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "ChelseaAnalytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e2ad0657-bfd8-569e-bf1c-75f547c1c88b"
+  }
+}

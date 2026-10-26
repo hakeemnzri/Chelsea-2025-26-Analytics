@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "ChelseaAnalytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ac4d45dc-b9da-5275-baa7-d9ea9ce69fe4"
+  }
+}

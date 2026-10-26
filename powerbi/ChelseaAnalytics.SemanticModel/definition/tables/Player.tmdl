@@ -1,0 +1,51 @@
+table Player
+	lineageTag: 6d38d8cf-307d-572a-aeeb-28d92b853bd7
+
+	column player_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ddcc6e48-e265-5d8f-833c-b00ca39596bf
+		summarizeBy: none
+		sourceColumn: player_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Player
+		dataType: string
+		lineageTag: f80804b4-b669-563a-b62f-27e097e17b05
+		summarizeBy: none
+		sourceColumn: player
+
+		annotation SummarizationSetBy = Automatic
+
+	column Position
+		dataType: string
+		lineageTag: a42a7f0c-308c-5b74-b6cd-37faf6b0f522
+		summarizeBy: none
+		sourceColumn: position_group
+		sortByColumn: 'Position Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Position Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d59ea725-0223-5e93-ab05-60a3e742eb19
+		summarizeBy: none
+		sourceColumn: position_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Player = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "dim_player"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

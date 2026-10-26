@@ -1,0 +1,82 @@
+{
+  "name": "Chelsea",
+  "dataColors": [
+    "#034694",
+    "#DBA111",
+    "#6CABDD",
+    "#D7263D",
+    "#2E9E5B",
+    "#9AA3B2",
+    "#0B1F3A",
+    "#F2C14E",
+    "#3E7CB1",
+    "#8E5572"
+  ],
+  "foreground": "#0B1F3A",
+  "foregroundNeutralSecondary": "#5B6577",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F6FA",
+  "tableAccent": "#034694",
+  "good": "#2E9E5B",
+  "neutral": "#9AA3B2",
+  "bad": "#D7263D",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "color": "#0B1F3A",
+      "fontSize": 11
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "color": "#034694",
+      "fontSize": 22
+    }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F4F6FA"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E1E6EF"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

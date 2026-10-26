@@ -1,0 +1,36 @@
+relationship 90934282-9e90-5170-b3a6-31d0d71eb0fa
+	fromColumn: Matches.date_key
+	toColumn: Calendar.date_key
+
+relationship c246b5e3-f7b8-519e-a8c0-636cf4546fd6
+	fromColumn: Matches.competition_key
+	toColumn: Competition.competition_key
+
+relationship 78b6ddde-ee99-5f3e-9cbb-c6d220a827f1
+	fromColumn: Matches.opponent_key
+	toColumn: Opponent.opponent_key
+
+relationship 208aee54-86ca-518c-b9c9-2c8839fccd57
+	fromColumn: Matches.venue
+	toColumn: Venue.Venue
+
+relationship 29283482-d2d6-5fec-9763-cd3d4d3368f0
+	fromColumn: 'Player Stats'.date_key
+	toColumn: Calendar.date_key
+
+relationship f337d778-5a5e-5b85-9f60-0c36682b10dd
+	fromColumn: 'Player Stats'.competition_key
+	toColumn: Competition.competition_key
+
+relationship 895a7ad4-5135-595f-988a-83b235188663
+	fromColumn: 'Player Stats'.opponent_key
+	toColumn: Opponent.opponent_key
+
+relationship 882e6620-0193-578f-abca-4ef84ce728fd
+	fromColumn: 'Player Stats'.venue
+	toColumn: Venue.Venue
+
+relationship 58455883-48c8-5a52-9978-c286c80374f4
+	fromColumn: 'Player Stats'.player_key
+	toColumn: Player.player_key
+

@@ -1,0 +1,17 @@
+# passwords
+.env
+
+# python
+__pycache__/
+.venv/
+.pytest_cache/
+
+# downloaded data (can be downloaded again)
+data/raw/
+
+# FBref data, export it yourself (see README)
+data/manual_exports/
+
+# Power BI local files and cached data
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf

@@ -1,103 +1,71 @@
-# Chelsea Analytics
+# Chelsea 2025/26 Season Dashboard
 
-## Overview
+A project where I collect Chelsea's 2025/26 match and player stats, store them in a
+PostgreSQL database and make a Power BI dashboard from it.
 
-Chelsea Analytics is a Python-based football analytics project designed to collect, process, store, and analyze Chelsea FC player performance data.
+It covers all 59 games (Premier League, Champions League, FA Cup and EFL Cup).
+Player stats are only for the 38 Premier League games.
 
-The project aims to build a reliable data pipeline that transforms publicly available football statistics into structured datasets for visualization using Microsoft Power BI.
+## Where the data comes from
 
-This project serves as a portfolio demonstrating software engineering, data engineering, data analysis, and business intelligence practices.
+- **Understat** (understat.com): Premier League results, xG and player stats for each game.
+  The script downloads this automatically.
+- **FBref** (fbref.com): every competition's results, plus possession, attendance and referee.
+  FBref blocks scripts, so I export this one by hand (see below).
 
----
+## How to run it
 
-# Objectives
+You need Python 3.12+, PostgreSQL and Power BI Desktop.
 
-- Collect Chelsea FC player statistics from FBref.
-- Build a modular and maintainable web scraping pipeline.
-- Clean and validate collected data.
-- Store historical records in a SQLite database.
-- Export datasets for Power BI.
-- Create an interactive dashboard for player performance analysis.
-- Follow software engineering best practices throughout development.
+1. Install the packages:
+   ```
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+2. Copy `.env.example` to `.env` and put your PostgreSQL password in it.
+3. Export the FBref fixtures:
+   - Open https://fbref.com/en/squads/cff3d9bb/2025-2026/Chelsea-Stats
+   - Go to the **Scores & Fixtures** table, then Share & Export, then Get table as CSV.
+   - Save the text as `data/manual_exports/fbref_scores_fixtures_2025_2026.csv`.
+4. Create the database and load the data:
+   ```
+   python scripts/setup_database.py
+   python scripts/run_etl.py
+   ```
+5. Open `powerbi/ChelseaAnalytics.pbip` in Power BI Desktop and click **Refresh**.
+   Log in with your PostgreSQL username and password (choose "Database" login).
 
----
+Running `run_etl.py` again is fine, it updates the existing rows instead of adding duplicates.
+The Understat data is saved in `data/raw/` the first time, use `--refresh` to download it again.
 
-# Technology Stack
-
-- Python
-- Pandas
-- Requests
-- BeautifulSoup4
-- SQLite
-- Power BI
-- Git
-
----
-
-# Project Structure
+## Checking it works
 
 ```
-ChelseaAnalytics/
-
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── exports/
-│
-├── database/
-│
-├── docs/
-│
-├── powerbi/
-│   └── datasets/
-│
-├── src/
-│   ├── scraper/
-│   ├── processing/
-│   ├── database/
-│   └── utils/
-│
-├── tests/
-│
-├── README.md
-├── requirements.txt
-├── pyproject.toml
-├── .gitignore
-└── LICENSE
+pytest
+psql -U postgres -d chelsea -f sql/data_quality_checks.sql
 ```
 
----
+The database tests use a separate `chelsea_test` database, so they don't touch the real data.
 
-# Planned Features
+## Files
 
-- FBref web scraper
-- Data validation pipeline
-- Data cleaning and transformation
-- SQLite database integration
-- CSV export for Power BI
-- Historical player performance tracking
-- Interactive Power BI dashboard
-- Automated data updates
-- Testing and documentation
+```
+etl/understat.py        downloads and reads the Understat data
+etl/fbref.py            reads the FBref CSV
+etl/teams.py            makes team names the same in both sources
+etl/load.py             saves everything into the database
+scripts/                setup_database.py and run_etl.py
+sql/schema.sql          the tables (star schema)
+sql/powerbi_views.sql   views that Power BI uses
+powerbi/                the Power BI dashboard (3 pages)
+tests/                  pytest tests
+```
 
----
+## Things to know
 
-# Development Approach
-
-The project follows an incremental milestone-based development process.
-
-Each milestone is planned, implemented, documented, and validated before moving to the next stage.
-
-Major architectural decisions are recorded to maintain consistency throughout the project.
-
----
-
-# Project Status
-
-Current Milestone
-
-✅ Milestone 0 — Project Foundation
-
-Next Milestone
-
-Design and implement the FBref data scraper.
+- xG is only for Premier League games (Understat doesn't have cup games).
+- Player stats are only for the Premier League for the same reason.
+- The FA Cup final was at a neutral ground, I counted it as a home game.
+- The "Points" card counts 3/1/0 for every game shown. Pick Premier League in the
+  filter to see the real league points.

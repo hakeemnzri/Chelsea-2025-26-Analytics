@@ -1,0 +1,60 @@
+table Competition
+	lineageTag: 7cf0ef41-6cb4-57f2-9c07-5baef00476f6
+
+	column competition_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 41d4cbf1-3e76-55e8-b55e-02ff8dd7d782
+		summarizeBy: none
+		sourceColumn: competition_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Competition
+		dataType: string
+		lineageTag: e262ce7e-2dc4-5b46-9af9-6a0587700d09
+		summarizeBy: none
+		sourceColumn: competition
+		sortByColumn: 'Competition Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Competition Type'
+		dataType: string
+		lineageTag: 1bd0df49-de26-58cb-89a3-d018992cac78
+		summarizeBy: none
+		sourceColumn: competition_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Competition Short'
+		dataType: string
+		lineageTag: bc06b1d8-ced9-5f53-ade2-79bad0904ff9
+		summarizeBy: none
+		sourceColumn: competition_short
+		sortByColumn: 'Competition Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Competition Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 59294acf-7410-5200-9502-6b089a3156c0
+		summarizeBy: none
+		sourceColumn: competition_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Competition = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "dim_competition"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

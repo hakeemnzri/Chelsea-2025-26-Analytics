@@ -1,0 +1,33 @@
+table Venue
+	lineageTag: 154d92c2-523f-5326-946d-21acf769aea4
+
+	column Venue
+		dataType: string
+		lineageTag: d50c9be1-d8f8-5b8c-b81e-fb1e6b82b679
+		summarizeBy: none
+		sourceColumn: venue
+		sortByColumn: 'Venue Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Venue Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cd9d50a9-53d4-51c9-9924-b75a2ea65845
+		summarizeBy: none
+		sourceColumn: venue_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Venue = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database(Server, Database),
+				    Data = Source{[Schema = "powerbi", Item = "dim_venue"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

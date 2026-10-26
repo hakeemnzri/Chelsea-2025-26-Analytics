@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 521.47871517470173,
+            "y": 150.6702038994797
+          },
+          "nodeIndex": "Player Stats",
+          "nodeLineageTag": "115b1ae4-abb7-58d8-a435-97af1be5c9ef",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 187.10490237739089,
+            "y": 618.53045476522493
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "1a8472e0-c172-56f7-ba3b-8ea6c832bd9f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 587.43766142051277,
+            "y": 503.84208327850843
+          },
+          "nodeIndex": "Competition",
+          "nodeLineageTag": "7cf0ef41-6cb4-57f2-9c07-5baef00476f6",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 235.28999580276775,
+            "y": 264.86649430131826
+          },
+          "nodeIndex": "Matches",
+          "nodeLineageTag": "7a842386-c7d4-5635-8f0e-9dcccbb2d61d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 84.0824407863181
+          },
+          "nodeIndex": "Opponent",
+          "nodeLineageTag": "92747e96-85db-5b99-a84c-2d8b1888b1b7",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 808.2829437143007,
+            "y": 276.00940586551724
+          },
+          "nodeIndex": "Player",
+          "nodeLineageTag": "6d38d8cf-307d-572a-aeeb-28d92b853bd7",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 337.005517153193,
+            "y": -50
+          },
+          "nodeIndex": "Venue",
+          "nodeLineageTag": "154d92c2-523f-5326-946d-21acf769aea4",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

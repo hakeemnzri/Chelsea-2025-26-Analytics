@@ -1,0 +1,284 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "matches.record": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Record"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Record (W-D-L)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "matches.match_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Match Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "matches.xg_for": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "xG For"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "xG": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "matches.xg_against": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "xG Against"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "xGA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "matches.avg_possession_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Avg Possession %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Poss.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "matches.avg_attendance": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Avg Attendance"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Attendance": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "competition.competition_short": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Competition",
+			          "ConceptualProperty": "Competition Short"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Comp": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_stats.goals_chart": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Player Stats",
+			          "ConceptualProperty": "Goals (chart)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Goals": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_stats.assists_chart": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Player Stats",
+			          "ConceptualProperty": "Assists (chart)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Assists": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_stats.player_xg": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Player Stats",
+			          "ConceptualProperty": "Player xG"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "xG": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_stats.appearances": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Player Stats",
+			          "ConceptualProperty": "Appearances"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Apps": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_stats.player_xa": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Player Stats",
+			          "ConceptualProperty": "Player xA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "xA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_stats.yellow_cards": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Player Stats",
+			          "ConceptualProperty": "Yellow Cards"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "YC": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+
