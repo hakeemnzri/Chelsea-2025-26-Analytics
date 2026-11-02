@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "ov_header",
   "position": {
-    "x": 16,
-    "y": 12,
+    "x": 0,
+    "y": 0,
     "z": 0,
-    "height": 64,
-    "width": 760,
+    "height": 96,
+    "width": 1280,
     "tabOrder": 0
   },
   "visual": {
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Chelsea FC · 2025/26 Season",
+                    "value": "CHELSEA FC  ·  2025/26 SEASON",
                     "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "20pt",
-                      "color": "#034694"
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "9pt",
+                      "color": "#DBA111"
                     }
                   }
                 ]
@@ -31,10 +31,23 @@
               {
                 "textRuns": [
                   {
-                    "value": "All competitions · results from FBref, xG from Understat (Premier League only)",
+                    "value": "Season Overview",
                     "textStyle": {
-                      "fontSize": "10pt",
-                      "color": "#5B6577"
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontWeight": "bold",
+                      "fontSize": "22pt",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "All competitions  ·  results from FBref, xG from Understat (Premier League)",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#C8D6EE"
                     }
                   }
                 ]
@@ -51,7 +64,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#034694'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -65,6 +96,66 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }

@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "pl_minutes_by_position",
   "position": {
-    "x": 856,
-    "y": 500,
-    "z": 12000,
-    "height": 204,
-    "width": 408,
-    "tabOrder": 12000
+    "x": 856.0,
+    "y": 520,
+    "z": 13000,
+    "height": 184,
+    "width": 408.0,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "donutChart",
@@ -27,8 +27,7 @@
                 }
               },
               "queryRef": "Player.Position",
-              "nativeQueryRef": "Position",
-              "active": true
+              "nativeQueryRef": "Position"
             }
           ]
         },
@@ -52,28 +51,6 @@
         }
       }
     },
-    "objects": {
-      "legend": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Top'"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "visualContainerObjects": {
       "title": [
         {
@@ -91,36 +68,33 @@
                   "Value": "'Minutes by position'"
                 }
               }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#0B1F3A'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11D"
-                }
-              }
-            },
-            "bold": {
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "legend": [
+        {
+          "properties": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Right'"
                 }
               }
             }
           }
         }
       ]
-    },
-    "drillFilterOtherVisuals": true
+    }
   }
 }

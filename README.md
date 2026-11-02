@@ -1,71 +1,80 @@
 # Chelsea 2025/26 Season Dashboard
 
-A project where I collect Chelsea's 2025/26 match and player stats, store them in a
-PostgreSQL database and make a Power BI dashboard from it.
+A data project about Chelsea's 2025/26 season. I collected match and player stats with
+Python, stored them in a PostgreSQL database and built a Power BI dashboard on top.
 
-It covers all 59 games (Premier League, Champions League, FA Cup and EFL Cup).
-Player stats are only for the 38 Premier League games.
+**Tools:** Python, PostgreSQL, SQL, Power BI, pytest
 
-## Where the data comes from
+## The dashboard
 
-- **Understat** (understat.com): Premier League results, xG and player stats for each game.
-  The script downloads this automatically.
-- **FBref** (fbref.com): every competition's results, plus possession, attendance and referee.
-  FBref blocks scripts, so I export this one by hand (see below).
+It has 3 pages.
 
-## How to run it
+### Season Overview
 
-You need Python 3.12+, PostgreSQL and Power BI Desktop.
+Matches played, record, points, goals, clean sheets, last 5 results, points over the
+season, results by competition, and goals and points per game by month.
 
-1. Install the packages:
-   ```
-   python -m venv .venv
-   .venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-2. Copy `.env.example` to `.env` and put your PostgreSQL password in it.
-3. Export the FBref fixtures:
-   - Open https://fbref.com/en/squads/cff3d9bb/2025-2026/Chelsea-Stats
-   - Go to the **Scores & Fixtures** table, then Share & Export, then Get table as CSV.
-   - Save the text as `data/manual_exports/fbref_scores_fixtures_2025_2026.csv`.
-4. Create the database and load the data:
-   ```
-   python scripts/setup_database.py
-   python scripts/run_etl.py
-   ```
-5. Open `powerbi/ChelseaAnalytics.pbip` in Power BI Desktop and click **Refresh**.
-   Log in with your PostgreSQL username and password (choose "Database" login).
+![Season Overview](images/overview.png)
+*Season Overview, filtered to the Champions League.*
 
-Running `run_etl.py` again is fine, it updates the existing rows instead of adding duplicates.
-The Understat data is saved in `data/raw/` the first time, use `--refresh` to download it again.
+### Match Log
 
-## Checking it works
+Every game with the score, result, xG, possession and attendance. You can filter by
+competition, home/away and result.
 
-```
-pytest
-psql -U postgres -d chelsea -f sql/data_quality_checks.sql
-```
+![Match Log](images/match_log.png)
 
-The database tests use a separate `chelsea_test` database, so they don't touch the real data.
+### Players
 
-## Files
+Premier League stats for every player (minutes, goals, assists, xG, xA, shots), top
+scorers and assisters, goals vs xG, and minutes by position.
+
+![Players](images/players.png)
+*Players page, filtered to forwards.*
+
+## The season in numbers
+
+| | |
+|---|---|
+| Games played | 59 (Premier League, Champions League, FA Cup, EFL Cup) |
+| Record | 27 wins, 11 draws, 21 losses |
+| Goals | 109 scored, 83 conceded |
+| Clean sheets | 15 |
+| Premier League | 14 wins, 10 draws, 14 losses, 52 points |
+| Top scorer (PL) | João Pedro, 15 goals and 5 assists |
+
+## How it works
 
 ```
-etl/understat.py        downloads and reads the Understat data
-etl/fbref.py            reads the FBref CSV
-etl/teams.py            makes team names the same in both sources
-etl/load.py             saves everything into the database
-scripts/                setup_database.py and run_etl.py
-sql/schema.sql          the tables (star schema)
-sql/powerbi_views.sql   views that Power BI uses
-powerbi/                the Power BI dashboard (3 pages)
-tests/                  pytest tests
+Understat + FBref  ->  Python  ->  PostgreSQL  ->  Power BI
 ```
 
-## Things to know
+1. **Collect**: Python downloads Premier League results, xG and player stats from
+   Understat. Results for the other competitions, plus possession, attendance and
+   referees, come from FBref.
+2. **Clean**: team names are made the same in both sources (e.g. "Manchester Utd" and
+   "Manchester United"), so the same game isn't counted twice.
+3. **Load**: everything goes into a PostgreSQL star schema. That's 2 fact tables (one row
+   per match, one row per player per match) and dimension tables for dates, competitions,
+   opponents and players.
+4. **Report**: SQL views work out results, points and match labels, and Power BI reads
+   those views.
 
-- xG is only for Premier League games (Understat doesn't have cup games).
-- Player stats are only for the Premier League for the same reason.
-- The FA Cup final was at a neutral ground, I counted it as a home game.
-- The "Points" card counts 3/1/0 for every game shown. Pick Premier League in the
-  filter to see the real league points.
+The data is checked with pytest tests and SQL quality checks, for example no duplicate
+games and 11 starters in every match.
+
+## Project files
+
+```
+etl/          Python code: download, clean and load the data
+scripts/      scripts to create the database and run the load
+sql/          tables, Power BI views and data quality checks
+powerbi/      the Power BI dashboard
+tests/        tests for the code
+```
+
+## Notes
+
+- xG and player stats are for Premier League games only, because Understat only covers the league.
+- The FA Cup final was at a neutral ground, and I counted it as a home game.
+- Data sources: [Understat](https://understat.com) and [FBref](https://fbref.com).

@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "pl_table",
   "position": {
     "x": 432,
-    "y": 188,
-    "z": 10000,
-    "height": 300,
+    "y": 224,
+    "z": 11000,
+    "height": 280,
     "width": 832,
-    "tabOrder": 10000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "tableEx",
@@ -219,7 +219,8 @@
             },
             "direction": "Descending"
           }
-        ]
+        ],
+        "isDefaultSort": false
       }
     },
     "visualContainerObjects": {
@@ -239,222 +240,11 @@
                   "Value": "'Squad statistics'"
                 }
               }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#0B1F3A'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11D"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
             }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "aaf9d737569f885f1adc",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player"
-              }
-            },
-            "Property": "Player"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "c3746d6154a19fc3f261",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player"
-              }
-            },
-            "Property": "Position"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "00d4ef89fc59ef399fc0",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Appearances"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "0f340943bda7d42405b2",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Starts"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b85901e4679e65c58ea1",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Minutes"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "d5074414e60326b0b022",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Goals"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "200bbe8380d00be01b84",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Assists"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "624dfbdd9e43e6e92b74",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Player xG"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "09a9767e9e33561cfe88",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Player xA"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "2efb2a4da8f92cfb9368",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Goals per 90"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "9f0307641ae48ff36948",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "G+A per 90"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "265c7dde1c56beca1834",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Shots"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "3fb93af373358ee74f78",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Player Stats"
-              }
-            },
-            "Property": "Yellow Cards"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "pl_slicer_position",
   "position": {
-    "x": 792,
-    "y": 6,
-    "z": 1000,
-    "height": 74,
-    "width": 232,
-    "tabOrder": 1000
+    "x": 832,
+    "y": 12,
+    "z": 3000,
+    "height": 72,
+    "width": 210,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "slicer",
@@ -27,8 +27,7 @@
                 }
               },
               "queryRef": "Player.Position",
-              "nativeQueryRef": "Position",
-              "active": true
+              "nativeQueryRef": "Position"
             }
           ]
         }
@@ -42,43 +41,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'Dropdown'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "header": [
-        {
-          "properties": {
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#0B1F3A'"
-                    }
-                  }
-                }
-              }
-            },
-            "textSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "items": [
-        {
-          "properties": {
-            "textSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
                 }
               }
             }
